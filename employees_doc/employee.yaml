@@ -1,0 +1,129 @@
+openapi: 3.0.3
+info:
+  title: "MIBs Technology API"
+  version: "1.0.0"
+  description: API that allow users to obtain an existing information of Employee or Post,delete,uopdate
+  license:
+    name: MIBS Technology
+    url: htttp://mibstechnologies.com
+  contact:
+    name: MIBS Technology Team
+    url: htttp://mibstechnologies.com
+    email: info@mibstechnologies.com
+externalDocs:
+  description: More of Employee Api
+  url: htttp://mibstechnology.com
+
+servers:
+  - url: htttp://localhost:8080/v1/employee
+security: []
+paths:
+  /employees:
+    summary: All employee
+    get:
+      operationId: GetAllEmployee
+      description: Obtain information about employee in the Data
+      summary: return obtain information
+      parameters:
+        - name: bodyLimit
+          in: query
+          description: The Amount of employee returnd
+          schema:
+            type: integer
+            minimum: 10
+            maximum: 20
+            example: 15
+        - name: pageLimit
+          in: query
+          description: The pages to return employee
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5
+            example: 2
+      responses:
+        200:
+          description: Sucessfully pull of employee data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Employee"
+        400:
+          description: Fail
+          content:
+            application/json:
+              schema:
+                type: string
+    post:
+      operationId: PostNewEmployee
+      description: Create new employee in the database
+      summary: "Create New Employee"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: "#/components/schemas/Employee"
+
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Employee"
+        400:
+          description: Fail
+  /employee/{id}:
+    get:
+      operationId: UpdateSingleEmployee
+      description: Obtain info of a specific Employee
+      summary: "?"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: The Id of the Employee
+          schema:
+            type: string
+            example: 2aerf325fg5kd2
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/Employee"
+
+        400:
+          description: Fail
+
+components:
+  schemas:
+    Employee:
+      description: Model containing Employee info
+      properties:
+        id:
+          type: string
+          example: 2aerf325fg5kd2
+        employee name:
+          type: string
+          example: James Danlog
+        employee email:
+          type: string
+          example: James@gmail.com
+        employee salary:
+          type: integer
+          example: 35000
+        created date:
+          type: integer
+          example: 2023-04-10
+        updated_date:
+          type: integer
+          example: 0000-00-0
