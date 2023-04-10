@@ -1,2 +1,2 @@
-# Basic-Employee-API-Documentation
+# Employee-API-Documentation
 Documentation on Employee API
